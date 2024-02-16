@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  velox:
+    restart: always
+    build:
+      context: ./config
+      dockerfile: velox.dockerfile
+    image: x01/velox:${VELOX_VERSION}
+    hostname: velox
+    container_name: velox
+    volumes:
+      - ./config/t3mp/:/t3mp/
+    networks:
+      velox_net:
+    ports:
+      - 8001:8001 # API
+      - 8889:8889 # GUI
+      - 8000:8000 # Frontend
+      - 8003:8003 # Monitoring
+
+
+networks:
+  velox_net:
+    name: velox_net
